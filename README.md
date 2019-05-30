@@ -4,9 +4,22 @@ developed by researchers in the Cryptography Research Group at Microsoft Researc
 the version 2.3 codebase and dockerizes the library build (including a shared runtime), C++ example build,
 and Python wrapper build. The Python wrapper is using pybind11.
 
-To build the wrapped Python version of SEAL, first run the executable build-docker.sh. This creates a seal
-package that can be imported in Python; to see examples of how to use this package in cryptography tasks,
-run the executable run-docker.sh (which runs the examples implemented in SEALPythonExamples/examples.py).
+To build the wrapped Python version of SEAL, first run the executable:
+    build-docker.sh
+This creates a seal package that can be imported in Python; to see examples of how to use this package in cryptography tasks, run the executable
+    run-docker.sh
+(which runs the examples implemented in SEALPythonExamples/examples.py).
+
+[Ellie] To build natively on Mac:
+  1. cd SEAL
+  2. vim configure
+  3. :set fileformat=unix
+  4. :wq!
+  5. vim util/defines.h, search for GNUC and comment out three lines
+      with ifdef, etc.
+  6. cd ..
+  7. bash mac_build.sh <path to where you want to install the seal lib>
+  8. Now you can run SEALPythonExamples/examples.py directly
 
 When using the SEAL library for basic encryption tasks, the first step is to create a new EncryptionParameters
 object, and to set its modulus attributes. The polynomial modulus should be set to a power-of-2 cyclotomic
