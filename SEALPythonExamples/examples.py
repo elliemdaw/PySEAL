@@ -1590,7 +1590,7 @@ def save_example():
 
     print_example_banner("Example: Basics I");
 
-   
+
     parms = EncryptionParameters()
 
     # We first set the polynomial modulus. This must be a power-of-2 cyclotomic
@@ -1603,7 +1603,7 @@ def save_example():
     # computation in this example, it suffices to use a very small polynomial modulus
     parms.set_poly_modulus("1x^2048 + 1")
 
-   
+
     parms.set_coeff_modulus(seal.coeff_modulus_128(2048))
 
     # The plaintext modulus can be any positive integer, even though here we take
@@ -1630,7 +1630,7 @@ def save_example():
     # Print the parameters that we have chosen
     print_parameters(context);
 
- 
+
     encoder = IntegerEncoder(context.plain_modulus())
 
     # We are now ready to generate the secret and public keys. For this purpose we need
@@ -1723,28 +1723,55 @@ def save_example():
     print("Decoded integer: " + (str)(encoder.decode_int32(plain_result)))
 
 
+def print_menu():
+	print()
+	print("Welcome to SEALPython")
+	print("Available examples:")
+	print()
+	print("1. Basics 1- encoding and encrypting")
+	print("2. Basics 2- relinearization")
+	print("3. Serialization with pickle")
+	print("4. Weighted average")
+	print("5. Batching with PolyCTRBuilder")
+	print("6. Automatic parameter selection")
+	print("7. Performance test with single thread")
+	print("8. Performance test, multi-threaded")
+	print()
+	print("type any other key to exit")
+	print()
+
 
 def main():
-	# Example: Basics I
-	example_basics_i()
-	# Example: Basics II
-	example_basics_ii()
-	# Example: How to pickle Ciphertexts
-	example_pickle()
-	# Example: Weighted Average
-	example_weighted_average()
-	# Example: Batching using CRT
-	example_batching()
-	# Example: Parameter Selection
-	example_parameter_selection()
-	# Example: Performance (Single Thread)
-	example_performance_st()
-	# Example: Performance (Multi Thread)
-	th_count = ((int)(input('Thread count: ')))
-	if th_count > 0: example_performance_mt(th_count)
-	else: print('Invalid thread count.')
-	# Wait for ENTER before closing screen.
-	input('Press ENTER to exit')
+	print_menu()
+	choice = input("What example do you want to run? ")
+
+	if choice == '1':
+		# Example: Basics I
+		example_basics_i()
+	elif choice == '2':
+		# Example: Basics II
+		example_basics_ii()
+	elif choice == '3':
+		# Example: How to pickle Ciphertexts
+		example_pickle()
+	elif choice == '4':
+		# Example: Weighted Average
+		example_weighted_average()
+	elif choice == '5':
+		# Example: Batching using CRT
+		example_batching()
+	elif choice == '6':
+		# Example: Parameter Selection
+		example_parameter_selection()
+	elif choice == '7':
+		# Example: Performance (Single Thread)
+		example_performance_st()
+	elif choice == '8':
+		# Example: Performance (Multi Thread)
+		th_count = ((int)(input('Thread count: ')))
+		if th_count > 0: example_performance_mt(th_count)
+		else: print('Invalid thread count.')
+
 
 def print_example_banner(title, ch='*', length=78):
 	spaced_text = ' %s ' % title
